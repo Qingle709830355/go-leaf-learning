@@ -129,9 +129,9 @@ class ButtonImage(Image):
         self.rect.center = self.center_x, self.center_y
 
     def handle_event(self, event, command, *args):
-        self.hovered = self.rect.collidepoint(pygame.mouse.get_pos())
-        if self.hovered:
-            command(*args)
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if self.rect.collidepoint(event.pos):
+                command(*args)
 
 
 class ButtonColorSurface(ColorSurface):

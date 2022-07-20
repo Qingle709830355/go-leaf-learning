@@ -18,8 +18,23 @@ message LoginResponse {
 }
 
 
-message MsgInfo {
+message MyMessage {
   string msg = 1;
   string createTime = 2;
   LoginResponse userInfo = 3;
+}
+
+message GameHall {
+  int32 players = 1;
+  string gameType = 2;
+  repeated Room rooms = 3;
+}
+
+message Room {
+  string roomId = 1;
+  string gameType = 2;
+  int32 playerNum = 3;
+  int32 maxPlayerNum = 4;
+  int32 minPlayerNum = 5;
+  repeated LoginResponse users = 6;
 }

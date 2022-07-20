@@ -40,4 +40,4 @@ class Login(Basic):
             return
         user = {'username': name, 'password': pwd}
         ws_client.send_message(encode_msg('login', user))
-        APP.router.push('/chat')
+        APP.router.push('/hall')

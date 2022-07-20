@@ -11,10 +11,10 @@ func init() {
 
 func rpcNewAgent(args []interface{}) {
 	a := args[0].(gate.Agent)
-	OnlineAgents[a] = 1
+	OnlineAgents.Agents[a] = 1
 }
 
 func rpcCloseAgent(args []interface{}) {
 	a := args[0].(gate.Agent)
-	delete(OnlineAgents, a)
+	delete(OnlineAgents.Agents, a)
 }

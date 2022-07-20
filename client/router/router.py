@@ -1,6 +1,7 @@
 from app.app import APP
 from game.login.login import Login
 from game.chat.chat import Chat
+from game.hall.hall import Hall
 
 ROUTER_LIST = [
     {
@@ -12,6 +13,12 @@ ROUTER_LIST = [
         'path': '/chat',
         'name': 'chat',
         'component': Chat(),
+    },
+    {
+        'path': '/hall',
+        'name': 'hall',
+        'component': Hall(),
+        'first_send': None
     }
 ]
 

@@ -13,17 +13,22 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x08my.proto\"A\n\x0cLoginRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\"W\n\rLoginResponse\x12\x10\n\x08username\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\x15\n\rplayGameTimes\x18\x03 \x01(\t\x12\x0e\n\x06scores\x18\x04 \x01(\t\"L\n\x07MsgInfo\x12\x0b\n\x03msg\x18\x01 \x01(\t\x12\x12\n\ncreateTime\x18\x02 \x01(\t\x12 \n\x08userInfo\x18\x03 \x01(\x0b\x32\x0e.LoginResponseB\x06Z\x04.;pbb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x08my.proto\"A\n\x0cLoginRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\"W\n\rLoginResponse\x12\x10\n\x08username\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\x15\n\rplayGameTimes\x18\x03 \x01(\t\x12\x0e\n\x06scores\x18\x04 \x01(\t\"N\n\tMyMessage\x12\x0b\n\x03msg\x18\x01 \x01(\t\x12\x12\n\ncreateTime\x18\x02 \x01(\t\x12 \n\x08userInfo\x18\x03 \x01(\x0b\x32\x0e.LoginResponse\"C\n\x08GameHall\x12\x0f\n\x07players\x18\x01 \x01(\x05\x12\x10\n\x08gameType\x18\x02 \x01(\t\x12\x14\n\x05rooms\x18\x03 \x03(\x0b\x32\x05.Room\"\x86\x01\n\x04Room\x12\x0e\n\x06roomId\x18\x01 \x01(\t\x12\x10\n\x08gameType\x18\x02 \x01(\t\x12\x11\n\tplayerNum\x18\x03 \x01(\x05\x12\x14\n\x0cmaxPlayerNum\x18\x04 \x01(\x05\x12\x14\n\x0cminPlayerNum\x18\x05 \x01(\x05\x12\x1d\n\x05users\x18\x06 \x03(\x0b\x32\x0e.LoginResponseB\x06Z\x04.;pbb\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'my_pb2', globals())
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
+  DESCRIPTOR._serialized_options = b'Z\004.;pb'
   _LOGINREQUEST._serialized_start=12
   _LOGINREQUEST._serialized_end=77
   _LOGINRESPONSE._serialized_start=79
   _LOGINRESPONSE._serialized_end=166
-  _MSGINFO._serialized_start=168
-  _MSGINFO._serialized_end=244
+  _MYMESSAGE._serialized_start=168
+  _MYMESSAGE._serialized_end=246
+  _GAMEHALL._serialized_start=248
+  _GAMEHALL._serialized_end=315
+  _ROOM._serialized_start=318
+  _ROOM._serialized_end=452
 # @@protoc_insertion_point(module_scope)

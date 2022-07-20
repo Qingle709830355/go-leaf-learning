@@ -1,3 +1,5 @@
+from typing import List
+
 from . import my_pb2
 
 
@@ -43,7 +45,7 @@ class LoginResponse(BasePb):
 class MsgInfo(BasePb):
 
     def __init__(self, pb_class=None):
-        self.pb_class = pb_class if pb_class else my_pb2.MsgInfo()
+        self.pb_class = pb_class if pb_class else my_pb2.MyMessage()
         super().__init__(self.pb_class)
 
     def set_val(self, msg, user_info: LoginResponse):
@@ -52,9 +54,23 @@ class MsgInfo(BasePb):
         self.pb_class.msg = msg
 
 
+class Room(BasePb):
+    def __init__(self, pb_class=None):
+        self.pb_class = pb_class if pb_class else my_pb2.Room()
+        super().__init__(self.pb_class)
+
+
+class GameHall(BasePb):
+    def __init__(self, pb_class=None):
+        self.pb_class = pb_class if pb_class else my_pb2.GameHall()
+        super().__init__(self.pb_class)
+
+
 msg_types = {
     'login': LoginRequest,
     'msg': MsgInfo,
     'hello': None,
-    'loginResp': LoginResponse
+    'loginResp': LoginResponse,
+    'hall': GameHall,
+    'room': Room
 }

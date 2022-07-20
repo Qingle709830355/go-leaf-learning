@@ -4,12 +4,14 @@ import (
 	"github.com/name5566/leaf/gate"
 	"github.com/name5566/leaf/module"
 	"server/base"
+	"server/dataStruct"
 )
 
 var (
-	skeleton     = base.NewSkeleton()
-	ChanRPC      = skeleton.ChanRPCServer
-	OnlineAgents = make(map[gate.Agent]int)
+	skeleton          = base.NewSkeleton()
+	ChanRPC           = skeleton.ChanRPCServer
+	OnlineAgents      = dataStruct.OnlineAgents{Agents: make(map[gate.Agent]int)}
+	MapGameHallAgents = dataStruct.MapGameHallAgents{Agents: make(map[string]*dataStruct.GameHallAgents)}
 )
 
 type Module struct {
