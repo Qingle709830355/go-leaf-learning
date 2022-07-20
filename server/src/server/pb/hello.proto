@@ -1,0 +1,8 @@
+package msg;
+
+
+option go_package=".;msg";
+
+message Hello {
+  required string Name = 1;
+}
