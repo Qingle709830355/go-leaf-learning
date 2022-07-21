@@ -18,6 +18,9 @@ class Basic:
         self.screen = None
         self.running = True
         self.cache = None
+        self.handle_events = []
+        # 是否为刚进入页面
+        self.is_start = True
 
     def create_map(self):
         self.size, self.screen = self.basic_bg()
@@ -50,7 +53,7 @@ class Basic:
     def back(self):
         APP.router.pop()
 
-    def run(self, *args):
+    def run(self):
 
         while self.running:
             for event in pygame.event.get():
@@ -60,7 +63,7 @@ class Basic:
                     sys.exit()
                 # 重新刷整个页面
                 self.create_map()
-                for arg in args:
+                for arg in self.handle_events:
                     class_ = arg['class']
                     params = arg['args']
                     class_.handle_event(event, *params)
@@ -72,8 +75,9 @@ class Basic:
 
     def start(self):
         self.running = True
-        params = self.create_map()
-        self.run(*params)
+        self.is_start = True
+        self.handle_events = self.create_map()
+        self.run()
 
     def end(self):
         self.running = False

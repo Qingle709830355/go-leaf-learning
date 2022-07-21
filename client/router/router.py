@@ -18,7 +18,11 @@ ROUTER_LIST = [
         'path': '/hall',
         'name': 'hall',
         'component': Hall(),
-        'first_send': None
+    },
+    {
+        'path': '/chathall',
+        'name': 'hall',
+        'component': Hall(),
     }
 ]
 

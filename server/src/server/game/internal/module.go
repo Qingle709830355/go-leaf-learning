@@ -12,6 +12,7 @@ var (
 	ChanRPC           = skeleton.ChanRPCServer
 	OnlineAgents      = dataStruct.OnlineAgents{Agents: make(map[gate.Agent]int)}
 	MapGameHallAgents = dataStruct.MapGameHallAgents{Agents: make(map[string]*dataStruct.GameHallAgents)}
+	RoomsMap          = dataStruct.RoomMapByGameType{RoomMap: make(map[string]*dataStruct.RoomMap)}
 )
 
 type Module struct {

@@ -115,8 +115,9 @@ class ButtonText(Text):
     def handle_event(self, event, command, *args):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.rect.collidepoint(event.pos):
-                print('确认登录')
                 command(*args)
+                return True
+        return False
 
 
 class ButtonImage(Image):
@@ -129,9 +130,12 @@ class ButtonImage(Image):
         self.rect.center = self.center_x, self.center_y
 
     def handle_event(self, event, command, *args):
+        # 监听到操作 返回True
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.rect.collidepoint(event.pos):
                 command(*args)
+                return True
+        return False
 
 
 class ButtonColorSurface(ColorSurface):
@@ -144,9 +148,12 @@ class ButtonColorSurface(ColorSurface):
         self.rect.center = center_x, center_y
 
     def handle_event(self, event, command, *args):
-        self.hovered = self.rect.collidepoint(event.pos)
-        if self.hovered:
-            command(*args)
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            self.hovered = self.rect.collidepoint(event.pos)
+            if self.hovered:
+                command(*args)
+            return True
+        return False
 
 
 class InputBox:
@@ -212,7 +219,9 @@ class InputBox:
         pygame.draw.rect(screen, self.text_color, self.boxBody, 2)
 
     def handle_event(self, event: pygame.event.Event, command=None, *args):
+        have_run = False
         if event.type == pygame.MOUSEBUTTONDOWN:
+            have_run = True
             if self.boxBody.collidepoint(event.pos):  # 若按下鼠标且位置在文本框
                 self.active = not self.active
             else:
@@ -223,6 +232,7 @@ class InputBox:
             return
 
         if event.type == pygame.KEYDOWN:
+            have_run = True
             if self._ime_editing:
                 if len(self._ime_editing_text) == 0:
                     self._ime_editing = False
@@ -234,6 +244,7 @@ class InputBox:
                 return
 
             if event.key == pygame.K_BACKSPACE:
+                have_run = True
                 if len(self._ime_text) > 0 and self._ime_text_pos > 0:
                     self._ime_text = (
                             self._ime_text[0: self._ime_text_pos - 1]
@@ -242,11 +253,13 @@ class InputBox:
                     self._ime_text_pos = max(0, self._ime_text_pos - 1)
 
             elif event.key == pygame.K_DELETE:
+                have_run = True
                 self._ime_text = (
                         self._ime_text[0: self._ime_text_pos]
                         + self._ime_text[self._ime_text_pos + 1:]
                 )
             elif event.key == pygame.K_LEFT:
+                have_run = True
                 self._ime_text_pos = max(0, self._ime_text_pos - 1)
             elif event.key == pygame.K_RIGHT:
                 self._ime_text_pos = min(
@@ -254,11 +267,13 @@ class InputBox:
                 )
 
         elif event.type == pygame.TEXTEDITING:
+            have_run = True
             self._ime_editing = True
             self._ime_editing_text = event.text
             self._ime_editing_pos = event.start
 
         elif event.type == pygame.TEXTINPUT:
+            have_run = True
             self._ime_editing = False
             self._ime_editing_text = ""
             self._ime_text = (
@@ -267,6 +282,7 @@ class InputBox:
                     + self._ime_text[self._ime_text_pos:]
             )
             self._ime_text_pos += len(event.text)
+        return have_run
 
 
 class ShowBox(InputBox):
@@ -292,6 +308,7 @@ class ShowBox(InputBox):
     def handle_event(self, event: pygame.event.Event, command=None, *args):
         result = command(self, *args)
         if len(result) == len(self.chat_list):
-            return
+            return False
         self.chat_list = result
+        return True
 

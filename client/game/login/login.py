@@ -19,8 +19,10 @@ class Login(Basic):
         Text("请输入用户名称：", Color.BLACK, 'HYHanHeiW.ttf', 16, size=(width/2 - 120, height/2 - 100)).draw(self.screen)
         # 输入框
         input_name = InputBox(pygame.Rect(width/2 - 60, height/2 - 115, 100, 32))
+        input_name.draw(self.screen)
         Text("请输入用户名称：", Color.BLACK, 'HYHanHeiW.ttf', 16, size=(width/2 - 120, height/2)).draw(self.screen)
         input_pwd = InputBox(pygame.Rect(width / 2 - 60, height / 2 - 15, 100, 32))
+        input_pwd.draw(self.screen)
         # 确定登录按钮
         submit = ButtonText("确认登录", Color.create(255, 255, 255), 'HYHanHeiW.ttf', 24, rect_color=Color.create(40, 112, 21), size=(width / 2 + 92, height / 2 + 70))
         submit.draw(self.screen)

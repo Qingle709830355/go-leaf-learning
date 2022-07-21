@@ -59,6 +59,10 @@ class Room(BasePb):
         self.pb_class = pb_class if pb_class else my_pb2.Room()
         super().__init__(self.pb_class)
 
+    def set_val(self, user_info: LoginResponse, **kwargs):
+        super().set_val(**kwargs)
+        self.pb_class.users.append(user_info.pb_class)
+
 
 class GameHall(BasePb):
     def __init__(self, pb_class=None):

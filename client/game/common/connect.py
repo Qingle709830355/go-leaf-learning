@@ -20,7 +20,6 @@ class WebsocketClient(object):
         msg_class = decode_msg(message)
         game_class = APP.router.current_game()
         game_class.cache.save(msg_class)
-        print(msg_class.to_dict())
 
     def on_error(self, ws, error):
         print("client error:", error)
