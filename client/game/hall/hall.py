@@ -20,6 +20,7 @@ class Hall(Basic):
         self.is_start = True
 
     def create_map(self):
+        result = super().create_map()
         if self.is_start:
             # 成功进入大厅时，获取当前路由
             current_router = APP.router.current_router()
@@ -28,7 +29,6 @@ class Hall(Basic):
                 game_type = 'blank'
             self.submit(game_type, is_push=False)
             self.is_start = False
-        self.size, self.screen = self.basic_bg()
         # 头像
         Image(os.path.join(settings.ASSETS_PATH, 'touxiang.jpeg'), rect=pygame.Rect(50, 50, 200, 200),
               ratio=settings.SHOW_RATIO).draw(self.screen)
@@ -43,7 +43,6 @@ class Hall(Basic):
         Text(f" {self.username} 欢迎您, 当前大厅在线人数：{self.cache.GAME_HALL.pb_class.players}", Color.BLACK, 'HYHanHeiW.ttf', 16, size=(260, 50)).draw(self.screen)
 
         x, y = 50, 150
-        result = []
         # 游戏类型列表
         for game_info, image_file in enums.GAME_TYPES.items():
             button = ButtonImage(image_file, rect=pygame.Rect(x, y, 200, 200))

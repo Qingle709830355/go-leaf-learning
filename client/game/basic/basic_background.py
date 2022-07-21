@@ -3,7 +3,8 @@ import sys
 
 import pygame
 
-from game.basic.button import Image
+from app.app import APP
+from game.basic.button import Image, ButtonText, Color
 from utils import settings
 from game.common.connect import ws_client
 
@@ -20,7 +21,14 @@ class Basic:
 
     def create_map(self):
         self.size, self.screen = self.basic_bg()
-        return [{'class': None, 'args': []}]
+        width, height = self.size
+        result = []
+        if self.cache:
+            # 返回按钮
+            b = ButtonText("返回", Color.create(255, 255, 255), 'HYHanHeiW.ttf', 16, rect_color=Color.create(55, 55, 55), size=(width - 50, 20))
+            b.draw(self.screen)
+            result.append({'class': b, 'args': [self.back]})
+        return result
 
     def basic_bg(self):
         """
@@ -39,6 +47,9 @@ class Basic:
         # 绘制背景
         return size, screen
 
+    def back(self):
+        APP.router.pop()
+
     def run(self, *args):
 
         while self.running:
@@ -55,9 +66,12 @@ class Basic:
                     class_.handle_event(event, *params)
                     class_.draw(self.screen)
                 self.clock.tick(settings.FPS)
+                if not self.running:
+                    break
             pygame.display.update()
 
     def start(self):
+        self.running = True
         params = self.create_map()
         self.run(*params)
 

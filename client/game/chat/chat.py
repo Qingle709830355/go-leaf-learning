@@ -20,7 +20,7 @@ class Chat(Basic):
         self.username = None
 
     def create_map(self):
-        self.size, self.screen = self.basic_bg()
+        result = super().create_map()
         width, height = self.size
         # 头像
         Image(os.path.join(settings.ASSETS_PATH, 'touxiang.jpeg'), rect=pygame.Rect(50, 50, 200, 200),
@@ -44,9 +44,10 @@ class Chat(Basic):
         # 发送按钮
         submit = ButtonText("发送", Color.create(255, 255, 255), 'HYHanHeiW.ttf', 24, rect_color=Color.create(40, 112, 21), size=(width / 2, height - 15))
         submit.draw(self.screen)
-        return [{'class': show_, 'args': [self.add_msg]},
-                {'class': input_, 'args': []},
-                {'class': submit, 'args': [self.send_, input_]}]
+        result.extend([{'class': show_, 'args': [self.add_msg]},
+                  {'class': input_, 'args': []},
+                  {'class': submit, 'args': [self.send_, input_]}])
+        return result
 
     def add_msg(self, showBox: ShowBox):
         chat_list = self.cache.CHAT_LIST

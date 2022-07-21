@@ -4,14 +4,15 @@ from app.app import APP
 from game.basic.basic_background import Basic
 from game.basic.button import Text, ButtonText, InputBox, Color
 from game.common.connect import ws_client
+from game_data.user_data import UserDataCache
 from utils.utils import encode_msg
 
 
 class Login(Basic):
 
     def create_map(self):
-        self.size, self.screen = self.basic_bg()
-
+        # 重置COOKIE
+        result = super().create_map()
         width, height = self.size
         Text("欢迎使用MY Leaf客户端", Color.BLACK, 'msyh.ttc', 32, size=(width / 2, height / 2 - 250)).draw(self.screen)
         # 用户信息输入
@@ -23,9 +24,10 @@ class Login(Basic):
         # 确定登录按钮
         submit = ButtonText("确认登录", Color.create(255, 255, 255), 'HYHanHeiW.ttf', 24, rect_color=Color.create(40, 112, 21), size=(width / 2 + 92, height / 2 + 70))
         submit.draw(self.screen)
-        return [{'class': input_name, 'args': []},
-                {'class': input_pwd, 'args': []},
-                {'class': submit, 'args': [self.login, input_name, input_pwd]}]
+        result.extend([{'class': input_name, 'args': []},
+                       {'class': input_pwd, 'args': []},
+                       {'class': submit, 'args': [self.login, input_name, input_pwd]}])
+        return result
 
     def login(self, input_name, input_pwd):
         """
